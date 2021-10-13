@@ -1,0 +1,61 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_2.jpg' %}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end">
+      <div class="col-md-9 ftco-animate pb-5">
+       <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{% url 'home' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="blog.html">Events <i class="ion-ios-arrow-forward"></i></a></span></p>
+       <h1 class="mb-0 bread">{{ obj.title }}</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section ftco-degree-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ftco-animate">
+        <div class="meta mb-2" style="color: #fd645b;">
+
+            <span><i class="fa fa-calendar"></i> {{obj.eventdate}}
+            </span>
+            <span><i class="fa fa-clock-o"></i> {{obj.time}} &nbsp;
+            </span>
+            <span style="float:right;"><i class="fa fa-map"></i> {{obj.venue}}
+            </span>
+          </div>
+       <p>
+        {{ obj.description }}
+      </p>
+    </div> <!-- .col-md-8 -->
+    <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+
+
+      <div class="sidebar-box ftco-animate">
+        <h3>Recent Events</h3>
+        {% for i in events|slice:":5" %}
+        <div class="block-21 mb-4 d-flex" style="background-color: #fff5ed;padding:5px;">
+          <div class="text">
+            <h3 class="heading"><a href="{% url 'events_detail' i.id %}"> {{i.title}}</a></h3>
+            <div class="meta">
+              <div><a href="{% url 'events_detail' i.id %}"><span class="fa fa-calendar"></span> {{i.eventdate}}</a></div>
+
+              <div><a href="{% url 'events_detail' i.id %}"><span class="fa fa-clock-o"></span> {{i.time}}</a></div>
+              <div><a href="{% url 'events_detail' i.id %}"><span class="fa fa-map"></span> {{i.venue}}</a></div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+</section> <!-- .section -->
+
+{% endblock content %}

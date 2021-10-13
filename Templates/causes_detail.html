@@ -1,0 +1,65 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{{obj.image.url}}');" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end">
+      <div class="col-md-9 ftco-animate pb-5">
+       <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{% url 'home' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="{% url 'causes' %}">Causes <i class="ion-ios-arrow-forward"></i></a></span></p>
+       <h1 class="mb-0 bread">{{ obj.title }}</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section ftco-degree-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ftco-animate">
+        <div class="meta mb-2" style="color: #fd645b;">
+
+            <span><i class="fa fa-calendar"></i> {{obj.pub_date}}
+            </span>
+          </div>
+       <p>
+        {{ obj.text }}
+      </p>
+      <div class="goal mb-4">
+        <p>Target: <span style="color:#fd645b;">Rs. {{obj.target }}</span></p>
+        <div class="progress" style="height:30px">
+          <div class="progress-bar progress-bar-striped" style="width:{{obj.progress}}%; height:30px">{{obj.progress}}%</div>
+        </div>
+      </div>
+      <p><a href="{% url 'contact' %}" class="btn btn-light w-100">Donate Now</a></p>
+    </div> <!-- .col-md-8 -->
+    <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+
+
+      <div class="sidebar-box ftco-animate">
+        <h3>Recent Causes</h3>
+        {% for i in causes|slice:":5" %}
+        <div class="block-21 mb-4 d-flex">
+          <a class="blog-img mr-4" href="{% url 'causes_detail' i.id %}" style="background-image: url('{{i.image.url}}');"></a>
+          <div class="text">
+            <h3 class="heading"><a href="{% url 'causes_detail' i.id %}"> {{i.title}}</a></h3>
+            <div class="goal">
+              <span style="color:#fd645b;margin-bottom:0px;">Rs. {{i.target }}</span>
+              <div class="progress" style="height:10px">
+                <div class="progress-bar progress-bar-striped" style="width:{{i.progress}}%; height:10px">{{i.progress}}%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+</section> <!-- .section -->
+
+{% endblock content %}
